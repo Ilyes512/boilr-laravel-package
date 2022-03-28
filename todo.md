@@ -1,0 +1,2 @@
+- Replace kebabcase function in boilr so this wont happen: "Ilyes512" (input) -> "ilyes-512" (output).
+- 

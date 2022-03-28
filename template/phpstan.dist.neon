@@ -1,0 +1,12 @@
+includes:
+  - ./vendor/nunomaduro/larastan/extension.neon
+
+parameters:
+  level: max
+  paths:
+    - src
+    - config
+    - tests
+  ignoreErrors:
+    - message: '#Call to an undefined method Pest\\Expectation|Pest\\Support\\Extendable::[a-zA-Z]+\(\)\.#'
+      path: tests

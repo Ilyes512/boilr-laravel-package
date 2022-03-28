@@ -1,0 +1,62 @@
+version: "3"
+
+silent: true
+
+vars:
+  BOILR_TEMPLATE_NAME: laravel-package
+  BOILR_TEMPLATE_TEST_NAME: "{{.BOILR_TEMPLATE_NAME}}-skeleton-test"
+
+########################################################################################################################
+#
+# TOC
+#
+########################################################################################################################
+#
+# 1. BOILR
+# 2. TEST
+#
+########################################################################################################################
+
+tasks:
+
+########################################################################################################################
+#
+#  1. BOILR
+#
+########################################################################################################################
+
+  update:
+    desc: Update the current boilr template
+    deps: [remove-ds-store]
+    cmds:
+      - boilr template save . {{.BOILR_TEMPLATE_NAME}} -f
+
+  # Remove all .DS_Store files
+  remove-ds-store: find . -name .DS_Store -type f -delete
+
+########################################################################################################################
+#
+#  2. TEST
+#
+########################################################################################################################
+
+  test:
+    desc: Test template
+    deps: [remove-ds-store, test:cleanup]
+    cmds:
+      - boilr template save . "{{.BOILR_TEMPLATE_TEST_NAME}}" -f
+      - boilr template use "{{.BOILR_TEMPLATE_TEST_NAME}}" "../{{.BOILR_TEMPLATE_TEST_NAME}}" -f
+      - git -C ../{{.BOILR_TEMPLATE_TEST_NAME}} init
+      - git -C ../{{.BOILR_TEMPLATE_TEST_NAME}} add .
+      - git -C ../{{.BOILR_TEMPLATE_TEST_NAME}} commit -m "Initial commit"
+      - code ../{{.BOILR_TEMPLATE_TEST_NAME}}
+
+  test:cleanup:
+    desc: Cleanup test files
+    dir: ..
+    status:
+       - test ! -d "{{.BOILR_TEMPLATE_TEST_NAME}}"
+    cmds:
+      - cd "{{.BOILR_TEMPLATE_TEST_NAME}}"; task dc:down
+      - rm -rf "{{.BOILR_TEMPLATE_TEST_NAME}}"
+      - boilr template delete {{.BOILR_TEMPLATE_TEST_NAME}}

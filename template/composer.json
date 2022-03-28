@@ -1,0 +1,72 @@
+{
+    "name": "{{ lower Vendor }}/laravel-{{ kebabcase PackageName }}",
+    "type": "library",
+    "description": "A {{ PackageName }} package.",
+    "keywords": [
+        "package",
+        "{{ PackageName }}"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=8.1",
+        "illuminate/support": "^9.0"
+    },
+    "require-dev": {
+        "ext-xdebug": "*",
+        "ilyes512/code-style": "dev-strict",
+        "laravel/tinker": "^2.7.1",
+        "mockery/mockery": "^1.5.0",
+        "nunomaduro/larastan": "^2.0",
+        "orchestra/testbench": "^7.2.0",
+        "overtrue/phplint": "^4.1.0",
+        "pestphp/pest": "^1.21"
+    },
+    "autoload": {
+        "psr-4": {
+            "{{ camelcase (snakecase Vendor) }}\\{{ camelcase (snakecase PackageName) }}\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "{{ camelcase (snakecase Vendor) }}\\{{ camelcase (snakecase PackageName) }}\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "lint": "XDEBUG_MODE=off phplint --exclude=vendor .",
+        "checkstyle": "XDEBUG_MODE=off ecs check",
+        "fixstyle": "XDEBUG_MODE=off ecs check --fix",
+        "typecheck": "phpstan analyse",
+        "test": "phpunit",
+        "xtest": "XDEBUG_TRIGGER=1 phpunit --testdox",
+        "report": "XDEBUG_MODE=coverage phpunit --testdox --coverage-text --coverage-html coverage/html",
+        "outdatedvendor": "composer outdated --direct",
+        "checkall": [
+            "@lint",
+            "@checkstyle",
+            "@typecheck",
+            "@test",
+            "composer outdated --minor-only --strict",
+            "@outdatedvendor"
+        ],
+        "post-autoload-dump": "[ $COMPOSER_DEV_MODE -eq 0 ] || testbench optimize:clear"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "{{ camelcase (snakecase Vendor) }}\\{{ camelcase (snakecase PackageName) }}\\{{ camelcase (snakecase PackageName) }}ServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

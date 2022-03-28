@@ -1,0 +1,11 @@
+!.env
+.DS_Store
+/coverage
+/composer.lock
+/vendor
+/phpstan.neon
+/phpunit.xml
+/.phpunit.result.cache
+/.phplint-cache
+/auth.json
+Taskfile.yml
