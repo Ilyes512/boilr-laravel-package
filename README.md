@@ -8,7 +8,7 @@ A [Boilr](https://github.com/Ilyes512/boilr) Laravel Composer package template.
 
 **Requirements:**
 - [Boilr](https://github.com/Ilyes512/boilr#installation)
-- macOS only: CoreUtils (brew install coreutils)
+- macOS only: CoreUtils (`brew install coreutils`)
 
 ## Overview task commands
 
