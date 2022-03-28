@@ -11,6 +11,7 @@ use Illuminate\Support\DateFactory;
 use {{ camelcase (snakecase Vendor) }}\{{ camelcase (snakecase PackageName) }}\{{ camelcase (snakecase PackageName) }}ServiceProvider;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Orchestra\Testbench\TestCase as OrchestraTestbench;
+
 abstract class TestCase extends OrchestraTestbench
 {
     use MockeryPHPUnitIntegration;
