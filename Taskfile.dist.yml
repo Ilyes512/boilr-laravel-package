@@ -4,7 +4,7 @@ silent: true
 
 vars:
   BOILR_TEMPLATE_NAME: laravel-package
-  BOILR_TEMPLATE_TEST_NAME: "{{.BOILR_TEMPLATE_NAME}}-skeleton-test"
+  BOILR_TEMPLATE_TEST_NAME: "{{.BOILR_TEMPLATE_NAME}}-test"
 
 ########################################################################################################################
 #
@@ -26,7 +26,7 @@ tasks:
 ########################################################################################################################
 
   update:
-    desc: Update the current boilr template
+    desc: Update the boilr template
     deps: [remove-ds-store]
     cmds:
       - boilr template save . {{.BOILR_TEMPLATE_NAME}} -f
@@ -41,7 +41,7 @@ tasks:
 ########################################################################################################################
 
   test:
-    desc: Test template
+    desc: Test the boilr template
     deps: [remove-ds-store, test:cleanup]
     cmds:
       - boilr template save . "{{.BOILR_TEMPLATE_TEST_NAME}}" -f
@@ -52,7 +52,7 @@ tasks:
       - code ../{{.BOILR_TEMPLATE_TEST_NAME}}
 
   test:cleanup:
-    desc: Cleanup test files
+    desc: Cleanup boilr template test files
     dir: ..
     status:
        - test ! -d "{{.BOILR_TEMPLATE_TEST_NAME}}"

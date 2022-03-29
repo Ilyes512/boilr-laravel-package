@@ -1,4 +1,4 @@
-# Ilyes512/boilr-laravel-package-skeleton
+# Ilyes512/boilr-laravel-package
 
 Scoffold your Laravel composer package with ease...
 
@@ -18,9 +18,9 @@ An overview of all Task commands:
 $ task --list
 
 task: Available tasks for this project:
-* test:         Test laravel-package-skeleton
-* test:cleanup: Cleanup test laravel-package-skeleton files
-* update:       Update your curent boilr template
+* test:         Test the boilr template
+* test:cleanup: Cleanup boilr template test files
+* update:       Update the boilr template
 ```
 
 ## License
