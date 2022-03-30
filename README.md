@@ -1,8 +1,6 @@
 # Ilyes512/boilr-laravel-package
 
-Scoffold your Laravel composer package with ease...
-
-A [Boilr](https://github.com/Ilyes512/boilr) Laravel Composer package template.
+A [Boilr](https://github.com/Ilyes512/boilr) template for PHP Laravel packages.
 
 ## Install/Usage instructions
 

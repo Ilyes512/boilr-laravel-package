@@ -5,7 +5,7 @@
 /vendor
 /phpstan.neon
 /phpunit.xml
-/.phpunit.result.cache
+/.phpunit-cache
 /.phplint-cache
 /auth.json
 Taskfile.yml

@@ -15,5 +15,6 @@
         "felixfbecker.php-debug",
         "Kasik96.latte",
         "EditorConfig.EditorConfig",
+        // "mhutchie.git-graph",
     ]
 }
