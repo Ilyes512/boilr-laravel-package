@@ -17,3 +17,7 @@ Run the following command to publish the config file:
 ```bash
 php artisan vendor:publish --tag="{{ kebabcase PackageName }}-config"
 ```
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE) for more information.
