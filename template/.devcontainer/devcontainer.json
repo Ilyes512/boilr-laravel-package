@@ -15,6 +15,6 @@
         "xdebug.php-debug",
         "Kasik96.latte",
         "EditorConfig.EditorConfig",
-        // "mhutchie.git-graph",
+        "mhutchie.git-graph",
     ]
 }
