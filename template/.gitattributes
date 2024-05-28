@@ -14,11 +14,12 @@
 /.vsls.json                 export-ignore
 /auth.json                  export-ignore
 /ecs.php                    export-ignore
-/phpstan.neon               export-igore
+/phpstan.neon               export-ignore
 /phpstan.dist.neon          export-ignore
+/phpstan-baseline.neon      export-ignore
 /phpunit.xml                export-ignore
 /phpunit.xml.dist           export-ignore
 /Taskfile.dist.yml          export-ignore
 /Taskfile.yml               export-ignore
 /testbench.yaml             export-ignore
-/docker-compose.yml         export-ignore
+/compose.yml                export-ignore

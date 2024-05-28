@@ -1,12 +1,14 @@
 includes:
-  - ./vendor/nunomaduro/larastan/extension.neon
+	- phpstan-baseline.neon
+	- vendor/larastan/larastan/extension.neon
+	- vendor/phpstan/phpstan-mockery/extension.neon
 
 parameters:
-  level: 8
-  paths:
-    - src
-    - config
-    - tests
-  ignoreErrors:
-    - message: '#Call to an undefined method Pest\\Expectation|Pest\\Support\\Extendable::[a-zA-Z]+\(\)\.#'
-      path: tests
+	level: max
+	tmpDir: ./.phpstan.cache
+	noEnvCallsOutsideOfConfig: true
+	checkModelProperties: true
+	paths:
+		- src
+		- config
+		- tests

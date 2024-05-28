@@ -9,18 +9,19 @@
     ],
     "license": "MIT",
     "require": {
-        "php": ">=8.1",
-        "illuminate/support": "^9.0"
+        "php": ">=8.3",
+        "illuminate/support": "^11.0"
     },
     "require-dev": {
         "ext-xdebug": "*",
-        "ilyes512/code-style": "dev-strict",
-        "laravel/tinker": "^2.7.1",
-        "mockery/mockery": "^1.5.0",
-        "nunomaduro/larastan": "^2.0",
-        "orchestra/testbench": "^7.2.0",
-        "overtrue/phplint": "^5.0.0",
-        "pestphp/pest": "^1.21"
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "ilyes512/code-style": "^2.0-dev",
+        "larastan/larastan": "^2.9",
+        "laravel/tinker": "^2.9",
+        "mockery/mockery": "^1.6",
+        "orchestra/testbench": "^9.1",
+        "overtrue/phplint": "^9.3",
+        "phpstan/phpstan-mockery": "^1.1"
     },
     "autoload": {
         "psr-4": {
@@ -33,23 +34,26 @@
         }
     },
     "scripts": {
-        "lint": "XDEBUG_MODE=off phplint --exclude=vendor .",
-        "checkstyle": "XDEBUG_MODE=off ecs check",
-        "fixstyle": "XDEBUG_MODE=off ecs check --fix",
-        "typecheck": "XDEBUG_MODE=off phpstan analyse",
-        "test": "XDEBUG_MODE=off phpunit --testdox",
-        "xtest": "XDEBUG_MODE=develop,debug XDEBUG_SESSION=1 phpunit --testdox",
-        "report": "XDEBUG_MODE=coverage phpunit --testdox --coverage-text --coverage-html coverage/html",
-        "outdatedvendor": "XDEBUG_MODE=off composer outdated --direct",
+        "post-autoload-dump": "[ $COMPOSER_DEV_MODE -eq 0 ] || testbench optimize:clear",
         "checkall": [
+            "composer validate",
             "@lint",
             "@checkstyle",
-            "@typecheck",
-            "@test",
-            "@outdatedvendor --minor-only --strict",
-            "@outdatedvendor"
+            "@checktype",
+            "@test"
         ],
-        "post-autoload-dump": "[ $COMPOSER_DEV_MODE -eq 0 ] || testbench optimize:clear"
+        "lint": "XDEBUG_MODE=off phplint --exclude=vendor .",
+        "test": [
+            "Composer\\Config::disableProcessTimeout",
+            "XDEBUG_MODE=off phpunit -d --without-creating-snapshots"
+        ],
+        "test-report": [
+            "Composer\\Config::disableProcessTimeout",
+            "XDEBUG_MODE=off php -dpcov.enabled=1 -dpcov.directory=. vendor/bin/phpunit -d --without-creating-snapshots --coverage-text --coverage-html coverage/html"
+        ],
+        "checkstyle": "XDEBUG_MODE=off phpcs -n",
+        "fixstyle": "XDEBUG_MODE=off phpcbf -n",
+        "checktype": "XDEBUG_MODE=off phpstan analyse --memory-limit=-1 -v"
     },
     "extra": {
         "branch-alias": {
@@ -64,10 +68,18 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true,
             "dealerdirect/phpcodesniffer-composer-installer": true
         }
     },
     "minimum-stability": "stable",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "scripts-descriptions": {
+        "checkall": "Run all checks including tests",
+        "lint": "Lint PHP files",
+        "test": "Run PHPUnit tests",
+        "test-report": "Run PHPUnit tests with coverage report",
+        "checkstyle": "Check code style using php_codesniffer",
+        "fixstyle": "Fix code style using php_codesniffer",
+        "checktype": "Check code type using PHPStan"
+    }
 }

@@ -1,20 +1,28 @@
 {
     "name": "laravel-{{ kebabcase PackageName }}",
     "remoteUser": "code",
-    "dockerComposeFile": ["../docker-compose.yml"],
+    "dockerComposeFile": ["../compose.yml"],
     "service": "php",
     "workspaceFolder": "/workspace",
-    "settings": {
-        "terminal.integrated.defaultProfile.linux": "bash",
+    "postStartCommand": "git config --global --add safe.directory ${containerWorkspaceFolder}",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "bash"
+            },
+            "extensions": [
+                "bmewburn.vscode-intelephense-client",
+                "redhat.vscode-yaml",
+                "mehedidracula.php-namespace-resolver",
+                "xdebug.php-debug",
+                "Kasik96.latte",
+                "EditorConfig.EditorConfig",
+                "mhutchie.git-graph"
+            ]
+        }
     },
-    // "shutdownAction": "none",
-    "extensions": [
-        "bmewburn.vscode-intelephense-client",
-        "redhat.vscode-yaml",
-        "mehedidracula.php-namespace-resolver",
-        "xdebug.php-debug",
-        "Kasik96.latte",
-        "EditorConfig.EditorConfig",
-        "mhutchie.git-graph",
-    ]
+    "features": {
+        "ghcr.io/devcontainers-contrib/features/go-task:1": {},
+        "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
+    }
 }

@@ -7,7 +7,7 @@ namespace {{ camelcase (snakecase Vendor) }}\{{ camelcase (snakecase PackageName
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use PHPUnit\Framework\TestCase as PHPUnitTestCase;
 
-abstract class TestCase extends PHPUnitTestCase
+abstract class UnitTestCase extends PHPUnitTestCase
 {
     use MockeryPHPUnitIntegration;
 }

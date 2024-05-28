@@ -13,7 +13,7 @@ tasks:
     desc: Update the boilr template
     deps: [remove-ds-store]
     cmds:
-      - boilr template save . {{.BOILR_TEMPLATE_NAME}} -f
+      - boilr template save . "{{.BOILR_TEMPLATE_NAME}}" -f
 
   remove-ds-store:
     desc: Remove all .DS_Store files
@@ -27,10 +27,10 @@ tasks:
     cmds:
       - boilr template save . "{{.BOILR_TEMPLATE_TEST_NAME}}" -f
       - boilr template use "{{.BOILR_TEMPLATE_TEST_NAME}}" "../{{.BOILR_TEMPLATE_TEST_NAME}}" -f
-      - git -C ../{{.BOILR_TEMPLATE_TEST_NAME}} init
-      - git -C ../{{.BOILR_TEMPLATE_TEST_NAME}} add .
-      - git -C ../{{.BOILR_TEMPLATE_TEST_NAME}} commit -m "Initial commit"
-      - code ../{{.BOILR_TEMPLATE_TEST_NAME}}
+      - git -C "../{{.BOILR_TEMPLATE_TEST_NAME}}" init
+      - git -C "../{{.BOILR_TEMPLATE_TEST_NAME}}" add .
+      - git -C "../{{.BOILR_TEMPLATE_TEST_NAME}}" commit -m "Initial commit"
+      - code "../{{.BOILR_TEMPLATE_TEST_NAME}}"
 
   test:cleanup:
     desc: Cleanup boilr template test files
@@ -38,6 +38,6 @@ tasks:
     status:
        - test ! -d "{{.BOILR_TEMPLATE_TEST_NAME}}"
     cmds:
-      - cd "{{.BOILR_TEMPLATE_TEST_NAME}}"; task dc:down
+      - cd "{{.BOILR_TEMPLATE_TEST_NAME}}" && task down
       - rm -rf "{{.BOILR_TEMPLATE_TEST_NAME}}"
-      - boilr template delete {{.BOILR_TEMPLATE_TEST_NAME}}
+      - boilr template delete "{{.BOILR_TEMPLATE_TEST_NAME}}"
