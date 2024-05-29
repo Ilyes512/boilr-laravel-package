@@ -1,0 +1,98 @@
+name: PHP
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: {{`${{ github.workflow }}-${{ github.ref }}`}}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  composer-install:
+    name: Composer Install
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.6
+
+      - name: Get composer cache directory
+        id: composer-cache-dir
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer dependencies
+        id: composer-cache
+        uses: actions/cache@v4.0.2
+        with:
+          path: |
+            {{`${{ steps.composer-cache-dir.outputs.dir }}`}}
+            vendor
+          key: {{`${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}`}}
+          restore-keys: {{`${{ runner.os }}-composer-`}}
+
+      - name: Setup PHP
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        uses: shivammathur/setup-php@2.30.4
+        with:
+          php-version: "8.3"
+
+      - name: Validate composer.json and composer.lock
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer validate
+
+      - name: Install dependencies
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer install
+
+  tests:
+    name: PHPUnit tests
+    runs-on: ubuntu-24.04
+    needs: [composer-install]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.6
+
+      - name: Setup PHP
+        uses: ./.github/actions/setup-php
+        with:
+          coverage: pcov
+
+      - name: Run PHPUnit tests
+        run: php -dpcov.enabled=1 -dpcov.directory=. vendor/bin/phpunit --coverage-text --show-uncovered-for-coverage-text
+
+  checkstyle:
+    name: Checkstyle
+    runs-on: ubuntu-24.04
+    needs: [composer-install]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.6
+
+      - name: Setup PHP
+        uses: ./.github/actions/setup-php
+
+      - name: Run composer checkstyle
+        run: composer checkstyle
+
+  checktype:
+    name: Checktype
+    runs-on: ubuntu-24.04
+    needs: [composer-install]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4.1.6
+
+      - name: Setup PHP
+        uses: ./.github/actions/setup-php
+
+      - name: Run composer checktype
+        run: composer checktype
