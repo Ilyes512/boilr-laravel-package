@@ -3,6 +3,11 @@ version: "3"
 
 dotenv: ['.env']
 
+vars:
+  MARKDOWNLINT_VERSION: v0.13.0
+  LOCAL_PWD:
+    sh: echo ${LOCAL_WORKSPACE_FOLDER:-$(pwd)}
+
 silent: true
 
 tasks:
@@ -38,3 +43,20 @@ tasks:
     cmds:
       - task: down
       - task: cleanup
+
+  md:checkstyle:
+    desc: Check style of Markdown files
+    cmds:
+      - docker run
+        --interactive
+        --tty
+        --rm
+        {{`--volume {{.LOCAL_PWD}}:/workdir`}}
+        {{`davidanson/markdownlint-cli2:{{.MARKDOWNLINT_VERSION}}`}}
+        {{`{{.CLI_ARGS}}`}}
+
+  md:fixstyle:
+    desc: Fix style of Markdown files
+    cmds:
+      - task: md:checkstyle
+        vars: { CLI_ARGS: --fix }
