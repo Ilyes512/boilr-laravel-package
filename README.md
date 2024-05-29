@@ -6,7 +6,6 @@ A [Boilr](https://github.com/Ilyes512/boilr) template for PHP Laravel packages.
 
 **Requirements:**
 - [Boilr](https://github.com/Ilyes512/boilr#installation)
-- macOS only: CoreUtils (`brew install coreutils`)
 
 ## Overview task commands
 

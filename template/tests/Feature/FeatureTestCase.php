@@ -12,7 +12,7 @@ use {{ camelcase (snakecase Vendor) }}\{{ camelcase (snakecase PackageName) }}\{
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Orchestra\Testbench\TestCase as OrchestraTestbench;
 
-abstract class TestCase extends OrchestraTestbench
+abstract class FeatureTestCase extends OrchestraTestbench
 {
     use MockeryPHPUnitIntegration;
 

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace {{ camelcase (snakecase Vendor) }}\{{ camelcase (snakecase PackageName) }}\Tests\Unit;
 
-class {{ camelcase (snakecase PackageName) }}Test extends TestCase
+class {{ camelcase (snakecase PackageName) }}Test extends UnitTestCase
 {
-    public function test_example(): void
+    public function testExample(): void
     {
-        expect(true)->toBeTrue();
+        $this->assertTrue(true);
     }
 }
