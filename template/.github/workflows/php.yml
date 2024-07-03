@@ -33,21 +33,18 @@ jobs:
           path: |
             {{`${{ steps.composer-cache-dir.outputs.dir }}`}}
             vendor
-          key: {{`${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}`}}
+          key: {{`${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}`}}
           restore-keys: {{`${{ runner.os }}-composer-`}}
 
       - name: Setup PHP
-        if: steps.composer-cache.outputs.cache-hit != 'true'
         uses: shivammathur/setup-php@2.30.4
         with:
           php-version: "8.3"
 
       - name: Validate composer.json and composer.lock
-        if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer validate
 
       - name: Install dependencies
-        if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install
 
   tests:
