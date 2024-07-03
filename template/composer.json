@@ -14,7 +14,6 @@
         "illuminate/support": "^11.0"
     },
     "require-dev": {
-        "ext-xdebug": "*",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
         "ilyes512/code-style": "^2.0-dev",
         "larastan/larastan": "^2.9",
