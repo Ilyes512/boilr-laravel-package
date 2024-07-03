@@ -19,6 +19,10 @@ task: Available tasks for this project:
 * test:cleanup: Cleanup boilr template test files
 * update:       Update the boilr template
 ```
+## Links
+
+- VSCode [Sharing Git/GPG Credentials](https://code.visualstudio.com/remote/advancedcontainers/sharing-git-credentials)
+  with DevContainer
 
 ## License
 
