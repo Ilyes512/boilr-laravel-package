@@ -11,6 +11,9 @@
     "require": {
         "php": ">=8.3",
         "illuminate/support": "^11.0"
+        {{- if AddAssertLib}},
+        "webmozart/assert": "^1.10"
+        {{- end}}
     },
     "require-dev": {
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
@@ -21,6 +24,9 @@
         "orchestra/testbench": "^9.1",
         "overtrue/phplint": "^9.3",
         "phpstan/phpstan-mockery": "^1.1"
+        {{- if AddAssertLib}}
+        "phpstan/phpstan-webmozart-assert": "^1.2",
+        {{- end}}
     },
     "autoload": {
         "psr-4": {

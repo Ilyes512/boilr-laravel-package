@@ -2,6 +2,9 @@ includes:
 	- phpstan-baseline.neon
 	- vendor/larastan/larastan/extension.neon
 	- vendor/phpstan/phpstan-mockery/extension.neon
+	{{- if AddAssertLib}}
+	- vendor/phpstan/phpstan-webmozart-assert/extension.neon
+	{{- end}}
 
 parameters:
 	level: max
