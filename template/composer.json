@@ -1,7 +1,6 @@
 {
     "name": "{{ lower Vendor }}/laravel-{{ kebabcase PackageName }}",
     "type": "library",
-    "version": "0.1.0",
     "description": "A {{ PackageName }} package.",
     "keywords": [
         "package",
@@ -12,9 +11,11 @@
     "require": {
         "php": ">=8.3",
         "illuminate/support": "^11.0"
+        {{- if AddAssertLib}},
+        "webmozart/assert": "^1.10"
+        {{- end}}
     },
     "require-dev": {
-        "ext-xdebug": "*",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
         "ilyes512/code-style": "^2.0-dev",
         "larastan/larastan": "^2.9",
@@ -23,6 +24,9 @@
         "orchestra/testbench": "^9.1",
         "overtrue/phplint": "^9.3",
         "phpstan/phpstan-mockery": "^1.1"
+        {{- if AddAssertLib}}
+        "phpstan/phpstan-webmozart-assert": "^1.2",
+        {{- end}}
     },
     "autoload": {
         "psr-4": {
@@ -54,7 +58,8 @@
         ],
         "checkstyle": "XDEBUG_MODE=off phpcs -n",
         "fixstyle": "XDEBUG_MODE=off phpcbf -n",
-        "checktype": "XDEBUG_MODE=off phpstan analyse --memory-limit=-1 -v"
+        "checktype": "XDEBUG_MODE=off phpstan analyse --memory-limit=-1 -v",
+        "update-type-baseline": "XDEBUG_MODE=off phpstan --generate-baseline"
     },
     "extra": {
         "branch-alias": {
@@ -81,6 +86,7 @@
         "test-report": "Run PHPUnit tests with coverage report",
         "checkstyle": "Check code style using php_codesniffer",
         "fixstyle": "Fix code style using php_codesniffer",
-        "checktype": "Check code type using PHPStan"
+        "checktype": "Check code type using PHPStan",
+        "update-type-baseline": "Update PHPStan baseline"
     }
 }

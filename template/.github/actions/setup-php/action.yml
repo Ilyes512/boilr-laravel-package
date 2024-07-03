@@ -21,7 +21,7 @@ runs:
         path: |
           {{`${{ steps.composer-cache-dir.outputs.dir }}`}}
           vendor
-        key: {{`${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}`}}
+        key: {{`${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}`}}
 
     - name: Setup PHP
       uses: shivammathur/setup-php@2.30.2
@@ -30,6 +30,5 @@ runs:
         coverage: {{`${{ inputs.coverage }}`}}
 
     - name: Install dependencies
-      if: steps.composer-cache.outputs.cache-hit != 'true'
       shell: bash
       run: composer install

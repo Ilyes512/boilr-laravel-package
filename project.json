@@ -1,5 +1,6 @@
 {
     "PackageName": "Foobar",
     "Vendor": "Ilyes512",
-    "Author": "Ilyes Ahidar"
+    "Author": "Ilyes Ahidar",
+    "AddAssertLib": false
 }
