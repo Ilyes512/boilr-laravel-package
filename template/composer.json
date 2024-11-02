@@ -23,10 +23,13 @@
         "mockery/mockery": "^1.6",
         "orchestra/testbench": "^9.1",
         "overtrue/phplint": "^9.3",
-        "phpstan/phpstan-mockery": "^1.1"
-        {{- if AddAssertLib}},
-        "phpstan/phpstan-webmozart-assert": "^1.2"
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan-mockery": "^1.1",
+        "phpstan/phpstan-strict-rules": "^1.6",
+        {{- if AddAssertLib}}
+        "phpstan/phpstan-webmozart-assert": "^1.2",
         {{- end}}
+        "shipmonk/phpstan-rules": "^3.1"
     },
     "autoload": {
         "psr-4": {
@@ -74,7 +77,8 @@
     "config": {
         "sort-packages": true,
         "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true
         }
     },
     "minimum-stability": "stable",
