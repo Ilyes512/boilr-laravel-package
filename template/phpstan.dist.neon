@@ -15,3 +15,7 @@ parameters:
 		- src
 		- config
 		- tests
+	stubFiles:
+		- stubs/BackedEnum.php.stub
+	# ignoreErrors:
+	# 	- '#^Enum .*? has @implements tag, but does not implement any interface.$#'
