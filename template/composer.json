@@ -29,6 +29,7 @@
         {{- if AddAssertLib}}
         "phpstan/phpstan-webmozart-assert": "^1.2",
         {{- end}}
+        "phpunit/phpunit": "^11.1",
         "shipmonk/phpstan-rules": "^3.1"
     },
     "autoload": {
