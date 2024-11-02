@@ -17,4 +17,3 @@ services:
       - .:/workspace:delegated
       - vscode-extensions:/home/code/.vscode-server/extensions
       - ./.devcontainer/050-xdebug.ini:/usr/local/etc/php/conf.d/050-xdebug.ini
-
