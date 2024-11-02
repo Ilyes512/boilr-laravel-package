@@ -8,6 +8,6 @@ class {{ camelcase (snakecase PackageName) }}Test extends UnitTestCase
 {
     public function testExample(): void
     {
-        $this->assertTrue(true);
+        self::assertTrue(true);
     }
 }
