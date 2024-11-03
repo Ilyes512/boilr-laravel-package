@@ -29,23 +29,23 @@ abstract class FeatureTestCase extends OrchestraTestbench
     /**
      * Get package providers.
      *
-     * @param Application  $app
+     * @param Application $app
      *
-     * @return array<class-string>
+     * @return array<int,class-string>
      */
     protected function getPackageProviders($app): array
     {
         return [
-            {{ camelcase (snakecase PackageName) }}ServiceProvider::class,
+            FoobarServiceProvider::class,
         ];
     }
 
     /**
      * Get application timezone.
      *
-     * @param Application  $app
+     * @param Application $app
      */
-    protected function getApplicationTimezone($app): ?string
+    protected function getApplicationTimezone($app): string
     {
         return 'Europe/Amsterdam';
     }
@@ -53,7 +53,7 @@ abstract class FeatureTestCase extends OrchestraTestbench
     /**
      * Define routes setup.
      *
-     * @param Router  $router
+     * @param Router $router
      */
     protected function defineRoutes($router): void
     {
@@ -63,7 +63,7 @@ abstract class FeatureTestCase extends OrchestraTestbench
     /**
      * Define environment setup.
      *
-     * @param Application   $app
+     * @param Application $app
      */
     protected function getEnvironmentSetUp($app): void
     {
