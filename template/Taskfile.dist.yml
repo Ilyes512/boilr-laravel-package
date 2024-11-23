@@ -72,6 +72,15 @@ tasks:
       - task: down
       - task: up
 
+  refresh:
+    desc: Refresh the development environment
+    summary: |
+      Refresh the development environment by rebuilding all images, downing the environment, and starting it again.
+    cmds:
+      - task: up
+      - task: composer:update
+      - task: checkall
+
   ps:
     desc: Show all project container (including stopped ones)
     aliases: [status]
