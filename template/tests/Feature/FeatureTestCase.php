@@ -17,16 +17,6 @@ abstract class FeatureTestCase extends OrchestraTestbench
     use MockeryPHPUnitIntegration;
 
     /**
-     * Setup the test environment.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        mt_srand(1337);
-    }
-
-    /**
      * Get package providers.
      *
      * @param Application $app
