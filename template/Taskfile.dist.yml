@@ -199,3 +199,9 @@ tasks:
     cmds:
       - task: down
       - task: cleanup
+
+  tinker:
+    desc: Start a tinker interactive shell
+    cmds:
+      - task: dc:run
+        vars: { CLI_ARGS: php testbench tinker }
