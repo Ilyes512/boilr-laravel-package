@@ -9,6 +9,9 @@ vars:
   LOCAL_PWD:
     sh: echo ${LOCAL_WORKSPACE_FOLDER:-$(pwd)}
 
+# env:
+#   BUILDKIT_PROGRESS: plain
+
 silent: true
 
 tasks:
