@@ -29,9 +29,11 @@ RUN groupadd --gid "$USER_GID" "$USER" \
         /etc/fixuid \
         "$WORKSPACE_PATH" \
         "/home/$USER/.vscode-server/extensions" \
+        "/home/$USER/.composer" \
     && chown -R "$USER_UID":"$USER_GID" \
         "$WORKSPACE_PATH" \
         "/home/$USER/.vscode-server" \
+        "/home/$USER/.composer" \
     && echo "$USER" ALL=\(root\) NOPASSWD:ALL > "/etc/sudoers.d/$USER" \
     && chmod 0440 "/etc/sudoers.d/$USER" \
     && printf "user: $USER\ngroup: $GROUP\npaths:\n  - /var/www\n  - /home/$USER\n\n" > /etc/fixuid/config.yml

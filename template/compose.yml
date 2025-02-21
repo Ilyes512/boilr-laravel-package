@@ -14,7 +14,7 @@ services:
         IMAGE_TAG_PHP: $IMAGE_TAG_PHP
     volumes:
       - $HOME/.ssh/known_hosts:/home/code/.ssh/known_hosts:ro
-      # - $HOME/auth.json:/root/auth.json:ro
+      # - $HOME/.composer/auth.json:/home/code/.composer/auth.json:ro
       - .:/workspace:delegated
       - vscode-extensions:/home/code/.vscode-server/extensions
       - ./.devcontainer/050-xdebug.ini:/usr/local/etc/php/conf.d/050-xdebug.ini
