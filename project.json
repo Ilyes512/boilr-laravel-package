@@ -3,5 +3,10 @@
     "Vendor": "Ilyes512",
     "Author": "Ilyes Ahidar",
     "AddAssertLib": false,
-    "AddSnapshotLib": false
+    "AddSnapshotLib": false,
+    "PhpVersion": [
+        "8.4",
+        "8.3",
+        "8.2"
+    ]
 }
