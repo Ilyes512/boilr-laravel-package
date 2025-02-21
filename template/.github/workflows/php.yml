@@ -88,10 +88,10 @@ jobs:
         uses: actions/cache@v4.2.0
         with:
           path: .phpcs.cache
-          key: {{`${{ runner.os }}-phpcs-${{ github.ref_name }}`}}
+          key: {{`phpcs-${{ github.ref_name }}`}}
           restore-keys: |
-            {{`${{ runner.os }}-phpcs-${{ github.ref_name }}`}}
-            {{`${{ runner.os }}-phpcs-`}}
+            {{`phpcs-${{ github.ref_name }}`}}
+            {{`phpcs-`}}
 
       - name: Run composer checkstyle
         run: composer checkstyle
