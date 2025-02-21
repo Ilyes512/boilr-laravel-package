@@ -27,7 +27,7 @@ abstract class FeatureTestCase extends OrchestraTestbench
      *
      * @param Application $app
      *
-     * @return array<int,class-string>
+     * @return list<class-string>
      */
     protected function getPackageProviders($app): array
     {
