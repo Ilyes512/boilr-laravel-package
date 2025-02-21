@@ -11,32 +11,28 @@ use Illuminate\Support\DateFactory;
 use {{ camelcase (snakecase Vendor) }}\{{ camelcase (snakecase PackageName) }}\{{ camelcase (snakecase PackageName) }}ServiceProvider;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Orchestra\Testbench\TestCase as OrchestraTestbench;
+{{- if AddSnapshotLib}}
+use Spatie\Snapshots\MatchesSnapshots;
+{{- end}}
 
 abstract class FeatureTestCase extends OrchestraTestbench
 {
     use MockeryPHPUnitIntegration;
-
-    /**
-     * Setup the test environment.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        mt_srand(1337, MT_RAND_PHP);
-    }
+    {{- if AddSnapshotLib}}
+    use MatchesSnapshots;
+    {{- end}}
 
     /**
      * Get package providers.
      *
      * @param Application $app
      *
-     * @return array<int,class-string>
+     * @return list<class-string>
      */
     protected function getPackageProviders($app): array
     {
         return [
-            FoobarServiceProvider::class,
+            {{ camelcase (snakecase PackageName) }}ServiceProvider::class,
         ];
     }
 
@@ -73,4 +69,19 @@ abstract class FeatureTestCase extends OrchestraTestbench
 
         DateFactory::use(CarbonImmutable::class);
     }
+
+    {{- if AddSnapshotLib}}
+
+    protected function assertSnapshotShouldBeCreated(string $snapshotFileName): void
+    {
+        if ($this->shouldCreateSnapshots()) {
+            return;
+        }
+        static::fail(
+            "Snapshot \"$snapshotFileName\" does not exist.\n" .
+            "You can automatically create it by running \"composer update-test-snapshots\".\n" .
+            'Make sure to inspect the created snapshot afterwards to ensure its correctness!',
+        );
+    }
+    {{- end}}
 }

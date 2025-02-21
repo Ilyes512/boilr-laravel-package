@@ -28,24 +28,32 @@ jobs:
 
       - name: Cache Composer dependencies
         id: composer-cache
-        uses: actions/cache@v4.1.2
+        uses: actions/cache@v4.2.0
         with:
           path: |
             {{`${{ steps.composer-cache-dir.outputs.dir }}`}}
             vendor
-          key: {{`${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}`}}
-          restore-keys: {{`${{ runner.os }}-composer-`}}
+          key: {{`composer-${{ hashFiles('**/composer.json') }}`}}
+          restore-keys: {{`composer-`}}
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.31.1
+        uses: shivammathur/setup-php@2.32.0
         with:
+        {{- if eq PhpVersion "8.3"}}
           php-version: "8.3"
-
-      - name: Validate composer.json and composer.lock
-        run: composer validate
+        {{- else if eq PhpVersion "8.2"}}
+          php-version: "8.2"
+        {{- else}}
+          php-version: "8.4"
+        {{- end}}
 
       - name: Install dependencies
+        if: steps.composer-cache.outputs.cache-hit != 'true'
         run: composer install
+
+      - name: Validate composer.json and composer.lock
+        if: steps.composer-cache.outputs.cache-hit != 'true'
+        run: composer validate
 
   tests:
     name: PHPUnit tests
@@ -76,6 +84,15 @@ jobs:
       - name: Setup PHP
         uses: ./.github/actions/setup-php
 
+      - name: Checkstyle Cache
+        uses: actions/cache@v4.2.0
+        with:
+          path: .phpcs.cache
+          key: {{`phpcs-${{ github.ref_name }}`}}
+          restore-keys: |
+            {{`phpcs-${{ github.ref_name }}`}}
+            {{`phpcs-`}}
+
       - name: Run composer checkstyle
         run: composer checkstyle
 
@@ -91,5 +108,14 @@ jobs:
       - name: Setup PHP
         uses: ./.github/actions/setup-php
 
+      - name: Checktype Cache
+        uses: actions/cache@v4.2.0
+        with:
+          path: .phpstan.cache
+          key: {{`phpstan-${{ github.ref_name }}`}}
+          restore-keys: |
+            {{`phpstan-${{ github.ref_name }}`}}
+            phpstan-
+
       - name: Run composer checktype
-        run: composer checktype
+        run: composer checktype -- -vvv

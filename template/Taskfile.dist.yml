@@ -4,9 +4,13 @@ version: "3"
 dotenv: ['.env']
 
 vars:
-  MARKDOWNLINT_VERSION: v0.14.0
+  # Latatest version of Markdownlint: https://hub.docker.com/r/davidanson/markdownlint-cli2/tags or https://github.com/DavidAnson/markdownlint-cli2/tags
+  MARKDOWNLINT_VERSION: v0.16.0
   LOCAL_PWD:
     sh: echo ${LOCAL_WORKSPACE_FOLDER:-$(pwd)}
+
+# env:
+#   BUILDKIT_PROGRESS: plain
 
 silent: true
 
@@ -46,7 +50,7 @@ tasks:
     desc: Start development environment
     cmds:
       - task: dc
-        vars: { DOCKER_COMPOSE_ARGS: "up -d" }
+        vars: { DOCKER_COMPOSE_ARGS: "up --detach --no-recreate" }
 
   stop:
     desc: Stop development environment
@@ -70,14 +74,24 @@ tasks:
     cmds:
       - task: down
       - task: down
+      - task: build
       - task: up
+
+  refresh:
+    desc: Refresh the development environment
+    summary: |
+      Refresh the development environment by rebuilding all images, downing the environment, and starting it again.
+    cmds:
+      - task: up
+      - task: composer:update
+      - task: checkall
 
   ps:
     desc: Show all project container (including stopped ones)
     aliases: [status]
     cmds:
       - task: dc
-        vars: { DOCKER_COMPOSE_ARGS: "ps -a" }
+        vars: { DOCKER_COMPOSE_ARGS: "ps --all" }
 
   shell:
     desc: Open shell in php container
@@ -190,3 +204,9 @@ tasks:
     cmds:
       - task: down
       - task: cleanup
+
+  tinker:
+    desc: Start a tinker interactive shell
+    cmds:
+      - task: dc:run
+        vars: { CLI_ARGS: php testbench tinker }

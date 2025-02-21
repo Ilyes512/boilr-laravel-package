@@ -5,6 +5,7 @@
     <arg name="extensions" value="php" />
     <arg name="report" value="full"/>
     <arg name="colors"/>
+    <arg name="cache" value=".phpcs.cache"/>
     <arg value="s"/> <!-- Show sniff codes in report -->
     <arg value="p"/> <!-- Show progress in report -->
 
