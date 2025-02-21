@@ -74,6 +74,7 @@ tasks:
     cmds:
       - task: down
       - task: down
+      - task: build
       - task: up
 
   refresh:
