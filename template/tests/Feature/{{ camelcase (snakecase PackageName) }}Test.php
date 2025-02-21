@@ -6,8 +6,8 @@ namespace {{ camelcase (snakecase Vendor) }}\{{ camelcase (snakecase PackageName
 
 class {{ camelcase (snakecase PackageName) }}Test extends FeatureTestCase
 {
-    public function testExample(): void
+    public function testFeatureExample(): void
     {
-        self::assertTrue(true);
+        self::markTestSkipped('This is just a placeholder feature test');
     }
 }

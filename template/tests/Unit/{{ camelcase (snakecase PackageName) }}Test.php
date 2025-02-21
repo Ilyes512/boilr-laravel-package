@@ -6,8 +6,8 @@ namespace {{ camelcase (snakecase Vendor) }}\{{ camelcase (snakecase PackageName
 
 class {{ camelcase (snakecase PackageName) }}Test extends UnitTestCase
 {
-    public function testExample(): void
+    public function testUnitExample(): void
     {
-        self::assertTrue(true);
+        self::markTestSkipped('This is just a placeholder unit test');
     }
 }
