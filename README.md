@@ -15,9 +15,10 @@ An overview of all Task commands:
 $ task --list
 
 task: Available tasks for this project:
-* test:         Test the boilr template
-* test:cleanup: Cleanup boilr template test files
-* update:       Update the boilr template
+* test:                   Test the boilr template
+* update:                 Update the boilr template
+* test:cleanup:           Cleanup boilr template test files
+* test:interactive:       Test the boilr template interactivly
 ```
 ## Links
 

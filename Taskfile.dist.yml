@@ -36,7 +36,7 @@ tasks:
       - code "../{{.BOILR_TEMPLATE_TEST_NAME}}"
 
   test:interactive:
-    desc: Test the boilr template
+    desc: Test the boilr template interactivly
     deps: [remove-ds-store, test:cleanup]
     interactive: true
     cmds:
